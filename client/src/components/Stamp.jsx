@@ -10,7 +10,7 @@ export default function Stamp({ history }) {
   }
 
   return (
-    <div>
+    <div className="stamp--container">
       {history.map((bar, index) => {
         const barPhoto = barImage(bar.photos[0].photo_reference);
        return (
@@ -20,7 +20,9 @@ export default function Stamp({ history }) {
         </div>
         <div className="stamp--name">{bar.name}</div>
         <div className="stamp--icon">
+        <a href={`https://www.google.com/maps/search/?api=1&query=${bar.vicinity}&query_place_id=${bar.place_id}`} target="_blank" rel="noreferrer noopener" >
           <MapOutlinedIcon></MapOutlinedIcon>
+        </a>
         </div>
       </div>
        )
@@ -28,4 +30,3 @@ export default function Stamp({ history }) {
     </div>
   );
 }
-

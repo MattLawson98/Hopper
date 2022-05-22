@@ -19,17 +19,17 @@ export default function Dropdown({ userLogin }) {
     setUser({ email: "" });
   };
   return (
-    <div>
+    <div className="loggedIn">
       {user.email !== "" ? (
-        <div>
-          <h2>
-            Welcome, <span>{user.email}</span>
+        <div className="user">
+          <h2 className="user--text">
+            {/* Hi {user.email}! */}
           </h2>
-          <button onClick={logout}>Logout</button>
+          <button className="user--logout" onClick={logout}>LOGOUT</button>
         </div>
       ) : (
         <>
-          <Button onClick={() => setOpen(!open)}>Login</Button>
+          <Button className ="user--login"onClick={() => setOpen(!open)}>Login</Button>
           <div className="dropdown">{open && <Login onLogin={onLogin} />}</div>
           {open}
         </>

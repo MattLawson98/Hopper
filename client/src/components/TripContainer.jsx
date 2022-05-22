@@ -6,7 +6,7 @@ export default function TripContainer ({history}) {
 
   return (
     <div className='tripContainer'>
-      {(history.length > 0) && <Stamp history={history} />}
+      {history.length > 0 ? (<Stamp history={history}/>) : "You have no trips planned so far!"}
     </div>
   )
 }
