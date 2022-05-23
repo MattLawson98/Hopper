@@ -5,10 +5,9 @@ import Header from "./components/Header";
 import { CardFlip } from "./components/Card";
 import TripContainer from "./components/TripContainer";
 import Location from "./components/Location";
-import { Flip, Splitscreen } from "@mui/icons-material";
 import useChangeState from "./components/hooks/useChangeState";
 import Landing from "./components/Landing";
-import { CSSTransition } from "react-transition-group";
+import Venue from "./components/Venue";
 
 export default function App() {
   const [found, setFound] = useState(false);

@@ -8,11 +8,12 @@ export default function Landing() {
 
   return (
     <div className= {`landing ${hiddenClass}`} onClick={() => setIsHidden(true)}>
+      
       <div className="cater3-movingBG">
         <div className="flyinTxtCont">
           <div className="flyIn lineOne">Bar Hopper</div>
         </div>
       </div>
-    </div>
+      </div>
   );
 }
