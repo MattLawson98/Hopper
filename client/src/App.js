@@ -8,6 +8,7 @@ import Location from "./components/Location";
 import { Flip, Splitscreen } from "@mui/icons-material";
 import useChangeState from "./components/hooks/useChangeState"
 
+
 export default function App() {
   const [found, setFound] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
@@ -118,7 +119,6 @@ export default function App() {
   return (
     <div className="App">
       <Header userLogin={userLogin} />
-      {/* <LoginForm /> */}
       <div className="main">
         {found ? (
           <CardFlip bar={bar} isFlipped={isFlipped} click={click} />
