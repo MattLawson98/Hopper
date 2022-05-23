@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Landing.scss";
 
-export default function Landing({onClick}) {
+export default function Landing() {
+  const [isHidden, setIsHidden] = useState(false);
+
+  const hiddenClass = isHidden ? "hidden" : ""
+
   return (
-    <div className="landing" onClick={onClick}>
-      <div class="cater3-movingBG">
-        <div class="flyinTxtCont">
-          <div class="flyIn lineOne">Bar Hopper</div>
-          <div class="flyIn lineTwo"></div>
-          <div class="flyIn lineThree"></div>
+    <div className= {`landing ${hiddenClass}`} onClick={() => setIsHidden(true)}>
+      
+      <div className="cater3-movingBG">
+        <div className="flyinTxtCont">
+          <div className="flyIn lineOne">Bar Hopper</div>
         </div>
       </div>
-    </div>
+      </div>
   );
 }
