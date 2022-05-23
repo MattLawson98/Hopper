@@ -69,6 +69,7 @@ export default function App() {
   };
   let venue;
   let result = [];
+
   const Search = () => {
     console.log(lat, lng);
 
@@ -77,16 +78,10 @@ export default function App() {
       url: "https://google-maps28.p.rapidapi.com/maps/api/place/nearbysearch/json",
       params: {
         location: `${lat},${lng}`,
-<<<<<<< HEAD
         radius: '1000',
         language: 'en',
         keyword: 'pub',
         maxprice: '3'
-=======
-        radius: "1000",
-        language: "en",
-        keyword: "pub",
->>>>>>> 726e6f50a9884504f9d5587ea3f5f6a8a2350cdb
       },
       headers: {
         "X-RapidAPI-Host": "google-maps28.p.rapidapi.com",
@@ -118,6 +113,10 @@ export default function App() {
     return venueNum;
   };
 
+  const Copy = () => {
+    navigator.clipboard.writeText(`https://www.google.com/maps/search/?api=1&query=${bar.vicinity}&query_place_id=${bar.place_id}`);
+  }
+
   return (
     <div className="App">
       <Header userLogin={userLogin} />
@@ -126,7 +125,7 @@ export default function App() {
 
         <main>
           {found ? (
-            <CardFlip bar={bar} isFlipped={isFlipped} click={click} />
+            <CardFlip bar={bar} isFlipped={isFlipped} click={click} Copy={Copy} />
           ) : (
             <Location
               setFound={setFound}
