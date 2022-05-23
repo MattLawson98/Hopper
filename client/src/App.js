@@ -7,7 +7,6 @@ import TripContainer from "./components/TripContainer";
 import Location from "./components/Location";
 import useChangeState from "./components/hooks/useChangeState";
 import Landing from "./components/Landing";
-import Venue from "./components/Venue";
 
 export default function App() {
   const [found, setFound] = useState(false);
@@ -132,7 +131,6 @@ export default function App() {
           </button>
           <TripContainer history={history} />
         </main>
-      
     </div>
   );
 }
