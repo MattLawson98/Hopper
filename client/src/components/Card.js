@@ -4,7 +4,7 @@ import Venue from "./Venue";
 import VenueBack from "./VenueBack";
 import "./Card.scss";
 
-export default function CardFlip({isFlipped, bar}) {
+export default function CardFlip({isFlipped, bar, Copy}) {
 
    
   return (
@@ -21,7 +21,7 @@ export default function CardFlip({isFlipped, bar}) {
 
           {/* <YOUR_BACK_COMPONENT> */}
           {/* This is the back of the card. */}
-          {(bar && Object.keys(bar).length > 0)&&<Venue  bar={bar}>Click to flip</Venue>}
+          {(bar && Object.keys(bar).length > 0)&&<Venue  bar={bar} Copy={Copy()}>Click to flip</Venue>}
           {/* </YOUR_BACK_COMPONENT> */}
         </ReactCardFlip>
       </div>

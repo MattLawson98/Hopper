@@ -14,7 +14,7 @@ export default function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [bar, setBar] = useState({});
   const [history, setHistory] = useState([]);
-  
+  const [venueNum, setVenueNum] = useState(0);
 
   let newResults = [];
   const { flip, isFlipped } = useChangeState();
@@ -23,8 +23,12 @@ export default function App() {
     flip();
     const currentHistory = [...history, bar];
     setHistory(currentHistory);
+    newResults = searchResults;
     venue = searchResults[RandNum(searchResults)];
     setBar(venue);
+    console.log(newResults);
+    newResults.splice(venueNum,1);
+    setSearchResults(newResults);
     setTimeout(flip, 2000);
   }
 
@@ -69,6 +73,7 @@ export default function App() {
   };
   let venue;
   let result = [];
+
   const Search = () => {
     console.log(lat, lng);
 
@@ -77,9 +82,10 @@ export default function App() {
       url: "https://google-maps28.p.rapidapi.com/maps/api/place/nearbysearch/json",
       params: {
         location: `${lat},${lng}`,
-        radius: "1000",
-        language: "en",
-        keyword: "pub",
+        radius: '1000',
+        language: 'en',
+        keyword: 'pub',
+        maxprice: '3'
       },
       headers: {
         "X-RapidAPI-Host": "google-maps28.p.rapidapi.com",
@@ -96,20 +102,29 @@ export default function App() {
         console.log("Venue:", venue);
         setBar(venue);
         newResults = results;
+        newResults.splice(venueNum,1);
+        setSearchResults(newResults);
         flip();
       })
       .catch(function (error) {
         console.error(error);
       });
 
-    return result, newResults;
+    return (result, newResults);
   };
 
   const RandNum = (results) => {
     let max = results.length;
-    let venueNum = Math.floor(Math.random() * max);
+    setVenueNum(Math.floor(Math.random() * max));
     return venueNum;
   };
+
+  const Copy = () => {
+    navigator.clipboard.writeText(`https://www.google.com/maps/search/?api=1&query=${bar.vicinity}&query_place_id=${bar.place_id}`);
+  }
+
+
+  
 
   return (
     <div className="App">
@@ -120,7 +135,7 @@ export default function App() {
         <main>
           {found ? (
             <>
-            <CardFlip bar={bar} isFlipped={isFlipped} click={click} />
+            <CardFlip bar={bar} isFlipped={isFlipped} click={click} Copy={Copy} />
             <NextButton click={click} />
             </>
           ) : (
@@ -134,4 +149,5 @@ export default function App() {
         </main>
     </div>
   );
+
 }

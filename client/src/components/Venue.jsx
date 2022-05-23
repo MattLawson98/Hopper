@@ -5,8 +5,8 @@ import ShareIcon from '@mui/icons-material/Share';
 import { BarChartSharp } from "@mui/icons-material";
 
 
-export default function Venue({bar}) {
-
+export default function Venue({bar, Copy}) {
+  
   const priceLevel = (bar) => {
     if (bar === 1) {
       return "$"
@@ -45,6 +45,7 @@ export default function Venue({bar}) {
         </div>
         <div className="data--right"> 
         <div className="data--right--share">
+          {Copy}
           <ShareIcon />
         </div>
           <div className="data--right--map">
