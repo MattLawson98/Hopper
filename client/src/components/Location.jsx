@@ -5,14 +5,9 @@ import axios from "axios";
 
 export default  function Location(props) {
   const [name, setName] = useState("");
-  const [locationLat, setLocationLat] = useState({})
-  const [locationLng, setLocationLng] = useState("")
-
   const handleSubmit = (event) => {
     event.preventDefault();
   };
-
- 
 
   return (
     <main className="location">
