@@ -7,14 +7,42 @@
   flex-direction: column;
 
   &--image {
-    height: 100px;
+    height: 90px;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    & img {
+    object-fit: fill;
+    height: 100%;
+    width: 100%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    }
+  }
+
+  &--container{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 90%;
+    height: 95%;
+    overflow: hidden;
+
+    & .stamp {
+      margin-right: 20px;
+    }
   }
 
   &--name {
-    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    font-weight: bold;
+    overflow-x: hidden;
+    font-size: 0.5em;
     border-top: solid white 1px;
     border-bottom: solid white 1px;
     font-style: italic;
@@ -35,6 +63,7 @@
 
     & svg {
       font-size: 40px;
+      color: black;
       }
 
     &:hover {
