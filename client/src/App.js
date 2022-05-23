@@ -80,7 +80,8 @@ export default function App() {
         location: `${lat},${lng}`,
         radius: '1000',
         language: 'en',
-        keyword: 'pub'
+        keyword: 'pub',
+        maxprice: '3'
       },
       headers: {
         "X-RapidAPI-Host": "google-maps28.p.rapidapi.com",
@@ -153,4 +154,5 @@ export default function App() {
       </div>
     </div>
   );
+
 }
