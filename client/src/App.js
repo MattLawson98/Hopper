@@ -8,13 +8,14 @@ import Location from "./components/Location";
 import { Flip, Splitscreen } from "@mui/icons-material";
 import useChangeState from "./components/hooks/useChangeState";
 import Landing from "./components/Landing";
+import { CSSTransition } from "react-transition-group";
 
 export default function App() {
   const [found, setFound] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [bar, setBar] = useState({});
   const [history, setHistory] = useState([]);
-  const [isShowingMain, setIsShowingMain] = useState(false);
+  
 
   let newResults = [];
   const { flip, isFlipped } = useChangeState();
@@ -114,7 +115,9 @@ export default function App() {
   return (
     <div className="App">
       <Header userLogin={userLogin} />
-      {isShowingMain ? (
+      
+      <Landing />
+
         <main>
           {found ? (
             <CardFlip bar={bar} isFlipped={isFlipped} click={click} />
@@ -130,9 +133,7 @@ export default function App() {
           </button>
           <TripContainer history={history} />
         </main>
-      ) : (
-        <Landing onClick={() => setIsShowingMain(true)} />
-      )}
+      
     </div>
   );
 }
