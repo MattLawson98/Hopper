@@ -5,8 +5,9 @@ import Header from "./components/Header";
 import { CardFlip } from "./components/Card";
 import TripContainer from "./components/TripContainer";
 import Location from "./components/Location";
-import { Flip, Splitscreen } from "@mui/icons-material";
-import useChangeState from "./components/hooks/useChangeState"
+import useChangeState from "./components/hooks/useChangeState";
+import Landing from "./components/Landing";
+import NextButton from "./components/NextButton";
 
 
 export default function App() {
@@ -14,19 +15,22 @@ export default function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [bar, setBar] = useState({});
   const [history, setHistory] = useState([]);
-  let newResults = [];
-  const {flip,isFlipped} = useChangeState();
+  const [venueNum, setVenueNum] = useState(0);
 
- 
+  let newResults = [];
+  const { flip, isFlipped } = useChangeState();
+
   function click() {
     flip();
     const currentHistory = [...history, bar];
-    console.log("******* CURRENT HISTORY STATE **********")
-    console.log(currentHistory);
     setHistory(currentHistory);
+    newResults = searchResults;
     venue = searchResults[RandNum(searchResults)];
     setBar(venue);
-    setTimeout(flip,3000);
+    console.log(newResults);
+    newResults.splice(venueNum,1);
+    setSearchResults(newResults);
+    setTimeout(flip, 2000);
   }
 
   const userLogin = function (loginInfo, cb) {
@@ -37,52 +41,52 @@ export default function App() {
       password: loginInfo.password,
     };
 
-    return axios.post("/login", data)
-      .then()
+    return axios.post("/login", data).then();
   };
 
   let lat;
   let lng;
 
-  const  locationSearch = async (name) => {
-
-    const options = { 
-      method: 'GET',
-      url: 'https://google-maps-geocoding.p.rapidapi.com/geocode/json',
-      params: {address: name, language: 'en'},
+  const locationSearch = async (name) => {
+    const options = {
+      method: "GET",
+      url: "https://google-maps-geocoding.p.rapidapi.com/geocode/json",
+      params: { address: name, language: "en" },
       headers: {
-        'X-RapidAPI-Host': 'google-maps-geocoding.p.rapidapi.com',
-        'X-RapidAPI-Key': `${process.env.REACT_APP_GEOCODING_KEY}`
+        "X-RapidAPI-Host": "google-maps-geocoding.p.rapidapi.com",
+        "X-RapidAPI-Key": `${process.env.REACT_APP_GEOCODING_KEY}`,
       },
     };
-    
-      await axios.request(options).then(async function  (response) {
-        
+
+    await axios
+      .request(options)
+      .then(async function (response) {
         console.log(response.data);
-        lat = (response.data.results[0].geometry.location.lat)
-        lng = (response.data.results[0].geometry.location.lng)
-        console.log(lat,lng);
+        lat = response.data.results[0].geometry.location.lat;
+        lng = response.data.results[0].geometry.location.lng;
+        console.log(lat, lng);
         setFound(true);
-        Search()
-    }).catch(function (error) {
-      console.error(error);
-    }); 
-    
-  }
+        Search();
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  };
   let venue;
   let result = [];
-  // let photo;
-  const Search =  () => {
+
+  const Search = () => {
     console.log(lat, lng);
 
     const options = {
-      method: 'GET',
-      url: 'https://google-maps28.p.rapidapi.com/maps/api/place/nearbysearch/json',
+      method: "GET",
+      url: "https://google-maps28.p.rapidapi.com/maps/api/place/nearbysearch/json",
       params: {
         location: `${lat},${lng}`,
         radius: '1000',
         language: 'en',
-        keyword: 'pub'
+        keyword: 'pub',
+        maxprice: '3'
       },
       headers: {
         "X-RapidAPI-Host": "google-maps28.p.rapidapi.com",
@@ -90,44 +94,61 @@ export default function App() {
       },
     };
 
-     axios.request(options).then(function ({data:{results}}) {
-      setSearchResults(results);
-      console.log(results);
-      venue =(results[RandNum(results)]);
-      // photo = (venue.photos[0].photo_reference);
-      // setTimeout(grabPhoto,5000);
-      console.log("Venue:",venue);
-      setBar(venue);
-      newResults = results;
-      flip();
-    }).catch(function (error) {
-      console.error(error);
-    });
-    
+    axios
+      .request(options)
+      .then(function ({ data: { results } }) {
+        setSearchResults(results);
+        console.log(results);
+        venue = results[RandNum(results)];
+        console.log("Venue:", venue);
+        setBar(venue);
+        newResults = results;
+        newResults.splice(venueNum,1);
+        setSearchResults(newResults);
+        flip();
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+
     return (result, newResults);
   };
 
   const RandNum = (results) => {
-    let max =results.length;
-    // console.log(max);
-    let venueNum = Math.floor(Math.random() * max);
-    // console.log(venueNum);
+    let max = results.length;
+    setVenueNum(Math.floor(Math.random() * max));
     return venueNum;
   };
 
+  const Copy = () => {
+    navigator.clipboard.writeText(`https://www.google.com/maps/search/?api=1&query=${bar.vicinity}&query_place_id=${bar.place_id}`);
+  }
+
+
+  
 
   return (
     <div className="App">
       <Header userLogin={userLogin} />
-      <div className="main">
-        {found ? (
-          <CardFlip bar={bar} isFlipped={isFlipped} click={click} />
-        ) : (
-          <Location setFound={setFound} setSearchResults={setSearchResults}  locationSearch={locationSearch} />
-        )}
-        <button onClick={click}>Next Bar!</button>
-        <TripContainer history={history}/>
-      </div>
+      
+      <Landing />
+
+        <main>
+          {found ? (
+            <>
+            <CardFlip bar={bar} isFlipped={isFlipped} click={click} Copy={Copy} />
+            <NextButton click={click} />
+            </>
+          ) : (
+            <Location
+              setFound={setFound}
+              setSearchResults={setSearchResults}
+              locationSearch={locationSearch}
+            />
+          )}
+          <TripContainer history={history} />
+        </main>
     </div>
   );
+
 }

@@ -5,7 +5,7 @@ export default function Autocomplete({ searchText, setName }) {
 
   const text = searchText;
 
-  const [address, setAddress] = useState("")
+  const [address, setAddress] = useState("Vancouver");
 
   const handleChange = (value) => {
     setAddress(value);
@@ -17,7 +17,7 @@ export default function Autocomplete({ searchText, setName }) {
     params: {input: text, language: 'en'},
     headers: {
       'X-RapidAPI-Host': 'google-maps28.p.rapidapi.com',
-      'X-RapidAPI-Key': '5c41b0e00fmsh909a8fa79575aafp1e7795jsna8ea2a497dd3'
+      'X-RapidAPI-Key': `process.env.REACT_APP_LUCUS_API`
     }
   };
   
@@ -26,7 +26,6 @@ export default function Autocomplete({ searchText, setName }) {
   }).catch(function (error) {
     console.error(error);
   });
-
 
     return (
       <div className="App" value={address} onChange={handleChange}>
@@ -44,38 +43,3 @@ export default function Autocomplete({ searchText, setName }) {
     </div>
   );
 }
-
-
-/* <div>
-      <div value={address} onChange={handleChange} />
-      {({getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-        <div>
-          <input> {getInputProps({
-            placeHolder: "Enter Address...",
-          })} 
-          </input>
-          <div>
-            {loading && <div>Loading...</div>}
-            {suggestions.map((suggestion => {
-              const style = suggestion.active ?
-              {background: "#a83232", cursor: "pointer"} :
-              {background: "#ffffff", cursor: "pointer"}
-
-              return (
-                <div {...getSuggestionItemProps(suggestion, {style})}>
-                  {suggestion.description}
-                </div>
-              )
-            }))}
-          </div>
-        </div>
-      )}
-
-    </div>
-  } else {
-    return <div></div>
-  }
-
-      
-    ) 
-} */

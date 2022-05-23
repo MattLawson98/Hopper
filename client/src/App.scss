@@ -27,15 +27,16 @@
   color: #61dafb;
 }
 
-.main {
+main {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
+  height: 93vh;
   background: url('./assets/wooden-texture_1208-334.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  
 }
 
 @keyframes App-logo-spin {
@@ -45,4 +46,22 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.alert-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.alert-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.alert-exit {
+  opacity: 1;
+}
+.alert-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
 }
