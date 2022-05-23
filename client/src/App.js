@@ -7,6 +7,7 @@ import TripContainer from "./components/TripContainer";
 import Location from "./components/Location";
 import useChangeState from "./components/hooks/useChangeState";
 import Landing from "./components/Landing";
+import NextButton from "./components/NextButton";
 
 export default function App() {
   const [found, setFound] = useState(false);
@@ -118,7 +119,10 @@ export default function App() {
 
         <main>
           {found ? (
+            <>
             <CardFlip bar={bar} isFlipped={isFlipped} click={click} />
+            <NextButton click={click} />
+            </>
           ) : (
             <Location
               setFound={setFound}
@@ -126,9 +130,6 @@ export default function App() {
               locationSearch={locationSearch}
             />
           )}
-          <button className="nextButton" onClick={click}>
-            Next Bar!
-          </button>
           <TripContainer history={history} />
         </main>
     </div>

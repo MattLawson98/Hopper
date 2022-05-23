@@ -48,21 +48,6 @@ main {
   }
 }
 
-.nextButton {
-    width: 9%;
-    height: 50px;
-    border: solid rgb(194, 191, 191) 1px;
-    background-color: white;
-    border-radius: 5px;
-    margin-top: 20px;
-    
-    &:hover {
-      cursor: pointer;
-      background-color: #2E3B55;
-      color: white;
-    }
-}
-
 .alert-enter {
   opacity: 0;
   transform: scale(0.9);
