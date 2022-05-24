@@ -22,7 +22,7 @@ export default function Header({userLogin}) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            BAR HOPPER
+            HOPPER
           </Typography>
           <Dropdown userLogin={userLogin} />
         </Toolbar>

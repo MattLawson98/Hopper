@@ -7,7 +7,7 @@ export default function Autocomplete({ searchText, setName }) {
 
   const text = searchText;
 
-  const [address, setAddress] = useState("Vancouver");
+  const [address, setAddress] = useState("");
 
   const handleChange = (value) => {
     setAddress(value);
@@ -19,7 +19,7 @@ export default function Autocomplete({ searchText, setName }) {
     params: {input: text, language: 'en'},
     headers: {
       'X-RapidAPI-Host': 'google-maps28.p.rapidapi.com',
-      // 'X-RapidAPI-Key': `${process.env.REACT_APP_LUCUS_API}`
+      'X-RapidAPI-Key': `${process.env.REACT_APP_LUCUS_API}`
     }
   };
   

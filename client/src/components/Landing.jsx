@@ -11,7 +11,7 @@ export default function Landing() {
       
       <div className="cater3-movingBG">
         <div className="flyinTxtCont">
-          <div className="flyIn lineOne">Bar Hopper</div>
+          <div className="flyIn lineOne">Hopper</div>
         </div>
       </div>
       </div>
