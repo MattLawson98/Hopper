@@ -21,7 +21,7 @@ export default function CardFlip({isFlipped, bar, Copy}) {
 
           {/* <YOUR_BACK_COMPONENT> */}
           {/* This is the back of the card. */}
-          {(bar && Object.keys(bar).length > 0)&&<Venue  bar={bar} Copy={Copy()}>Click to flip</Venue>}
+          {(bar && Object.keys(bar).length > 0)&&<Venue  bar={bar} Copy={Copy}>Click to flip</Venue>}
           {/* </YOUR_BACK_COMPONENT> */}
         </ReactCardFlip>
       </div>

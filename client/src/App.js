@@ -25,9 +25,9 @@ export default function App() {
     const currentHistory = [...history, bar];
     setHistory(currentHistory);
     newResults = searchResults;
+    console.log(newResults);
     venue = searchResults[RandNum(searchResults)];
     setBar(venue);
-    console.log(newResults);
     newResults.splice(venueNum,1);
     setSearchResults(newResults);
     setTimeout(flip, 2000);
@@ -61,7 +61,6 @@ export default function App() {
     await axios
       .request(options)
       .then(async function (response) {
-        console.log(response.data);
         lat = response.data.results[0].geometry.location.lat;
         lng = response.data.results[0].geometry.location.lng;
         console.log(lat, lng);
@@ -76,7 +75,6 @@ export default function App() {
   let result = [];
 
   const Search = () => {
-    console.log(lat, lng);
 
     const options = {
       method: "GET",
@@ -98,9 +96,7 @@ export default function App() {
       .request(options)
       .then(function ({ data: { results } }) {
         setSearchResults(results);
-        console.log(results);
         venue = results[RandNum(results)];
-        console.log("Venue:", venue);
         setBar(venue);
         newResults = results;
         newResults.splice(venueNum,1);
@@ -120,10 +116,7 @@ export default function App() {
     return venueNum;
   };
 
-  const Copy = () => {
-    navigator.clipboard.writeText(`https://www.google.com/maps/search/?api=1&query=${bar.vicinity}&query_place_id=${bar.place_id}`);
-  }
-
+ 
 
   
 
@@ -136,7 +129,7 @@ export default function App() {
         <main>
           {found ? (
             <>
-            <CardFlip bar={bar} isFlipped={isFlipped} click={click} Copy={Copy} />
+            <CardFlip bar={bar} isFlipped={isFlipped} click={click} />
             <NextButton click={click} />
             </>
           ) : (
