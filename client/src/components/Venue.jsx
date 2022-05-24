@@ -4,8 +4,12 @@ import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
 import ShareIcon from '@mui/icons-material/Share';
 
 
-export default function Venue({bar, Copy}) {
-  
+export default function Venue({bar}) {
+
+  const Copy = () => {
+    navigator.clipboard.writeText(`https://www.google.com/maps/search/?api=1&query=${bar.vicinity}&query_place_id=${bar.place_id}`);
+  }
+
   const priceLevel = (bar) => {
     if (bar === 1) {
       return "$"
@@ -33,7 +37,7 @@ export default function Venue({bar, Copy}) {
       </div> 
       
       <div className="venue--name">
-      {bar.name}
+        {bar.name}
       </div>
       <div className="data"> 
         <div className="data--left">
@@ -43,12 +47,11 @@ export default function Venue({bar, Copy}) {
        
         </div>
         <div className="data--right"> 
-        <div className="data--right--share" title="Copy">
-          {Copy}
+        <div className="data--right--share" title="Copy" onClick={Copy}>
           <ShareIcon />
         </div>
           <div className="data--right--map">
-        <a href={`https://www.google.com/maps/search/?api=1&query=${bar.vicinity}&query_place_id=${bar.place_id}`} target="_blank" rel="noreferrer noopener" >
+            <a href={`https://www.google.com/maps/search/?api=1&query=${bar.vicinity}&query_place_id=${bar.place_id}`}    target="_blank" rel="noreferrer noopener" >
           <MapOutlinedIcon />
         </a>
         </div>

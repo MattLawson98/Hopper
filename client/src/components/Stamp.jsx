@@ -6,9 +6,7 @@ import ShareIcon from '@mui/icons-material/Share';
 export default function Stamp({ history }) {
   console.log("HISTORY!", { history });
 
-  const CopyHistory = (reference) => {
-          navigator.clipboard.writeText(`https://www.google.com/maps/search/?api=1&query=${reference.vicinity}&query_place_id=${reference.place_id}`);
-        }
+
   const barImage = (reference) => {
     return `https://maps.googleapis.com/maps/api/place/photo?photoreference=${reference}&sensor=false&maxheight=1000&maxwidth=1000&key=${process.env.REACT_APP_GOOGLE_PHOTO_KEY}`;
   };
@@ -17,7 +15,11 @@ export default function Stamp({ history }) {
     <div className="stamp--container">
       {history.map((bar, index) => {
         const barPhoto = barImage(bar.photos[0].photo_reference);
-       
+
+        const CopyHistory = () => {
+          navigator.clipboard.writeText(`https://www.google.com/maps/search/?api=1&query=${bar.vicinity}&query_place_id=${bar.place_id}`);
+        }
+
         return (
           <div key={bar.name} className="stamp">
             <div className="stamp--image">
@@ -25,8 +27,7 @@ export default function Stamp({ history }) {
             </div>
             <div className="stamp--name">{bar.name}</div>
             <div className="stamp--icon">
-              <div className="stamp--icon--share">
-                {CopyHistory(bar)}
+              <div className="stamp--icon--share" onClick={CopyHistory}>
                 <ShareIcon />
               </div>
               <div className="stamp--icon--map">
