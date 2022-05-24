@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 
 export default function useChangeState() {
   const [isFlipped,_setFlipped] = useState(false)

@@ -2,7 +2,6 @@ import React from "react";
 import "./Venue.scss";
 import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
 import ShareIcon from '@mui/icons-material/Share';
-import { BarChartSharp } from "@mui/icons-material";
 
 
 export default function Venue({bar, Copy}) {
@@ -44,7 +43,7 @@ export default function Venue({bar, Copy}) {
        
         </div>
         <div className="data--right"> 
-        <div className="data--right--share">
+        <div className="data--right--share" title="Copy">
           {Copy}
           <ShareIcon />
         </div>
