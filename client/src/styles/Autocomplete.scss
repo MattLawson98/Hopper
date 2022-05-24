@@ -1,0 +1,17 @@
+.autocomplete {
+  display: flex;
+  justify-content: left;
+  
+  background-color: #fff;
+  border-radius: 2px;
+  border-top: 1px solid #d9d9d9;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  overflow: hidden;
+  width: 50%;
+  height: 70%;
+}
+
+.innerAutocomplete {
+height: 70%;
+}
