@@ -32,14 +32,10 @@ export default function Autocomplete({ searchText, setName }) {
     return (
       <div className="autocomplete" value={address} onChange={handleChange}>
       {address !== "" ? (
-        <div className="innerAutocomplete">
           <button onClick={() => setName(address)}>
-            <h2>
               <LocationOnIcon/>
               {address}
-          </h2>
           </button>
-        </div>
       ) : (
         <div/>
       )}
