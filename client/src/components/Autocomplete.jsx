@@ -7,7 +7,7 @@ export default function Autocomplete({ searchText, setName }) {
 
   const text = searchText;
 
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState("Vancouver");
 
   const handleChange = (value) => {
     setAddress(value);

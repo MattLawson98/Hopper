@@ -20,17 +20,18 @@ export default function App() {
   let newResults = [];
   const { flip, isFlipped } = useChangeState();
 
-  function click() {
+    function click() {
     flip();
     const currentHistory = [...history, bar];
     setHistory(currentHistory);
+    console.log(searchResults);
     newResults = searchResults;
     console.log(newResults);
-    venue = searchResults[RandNum(searchResults)];
-    setBar(venue);
+    venue = newResults[RandNum(newResults)];
     newResults.splice(venueNum,1);
     setSearchResults(newResults);
-    setTimeout(flip, 2000);
+    setTimeout(flip,2000);
+    setTimeout(() => setBar(venue),1000);
   }
 
   const userLogin = function (loginInfo, cb) {
@@ -111,8 +112,9 @@ export default function App() {
   };
 
   const RandNum = (results) => {
-    let max = results.length;
+    let max = results.length - 1;
     setVenueNum(Math.floor(Math.random() * max));
+    console.log(venueNum);
     return venueNum;
   };
 
