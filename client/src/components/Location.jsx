@@ -42,9 +42,9 @@ export default  function Location(props) {
             {autoComplete && <Autocomplete searchText={name} setName={handleAutocomplete} /> }
           </div>
         </label>
-        <div>
+      
         <button className="location--button" onClick={async () =>  {await props.locationSearch(name)}}>Select</button>
-        </div>
+        
       {/* </form> */}
     </main>
   );

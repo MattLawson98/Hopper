@@ -1,5 +1,7 @@
 import React, {useState} from "react";
+import "../styles/Autocomplete.scss";
 import axios from "axios";
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 export default function Autocomplete({ searchText, setName }) {
 
@@ -17,7 +19,7 @@ export default function Autocomplete({ searchText, setName }) {
     params: {input: text, language: 'en'},
     headers: {
       'X-RapidAPI-Host': 'google-maps28.p.rapidapi.com',
-      'X-RapidAPI-Key': `process.env.REACT_APP_LUCUS_API`
+      // 'X-RapidAPI-Key': `${process.env.REACT_APP_LUCUS_API}`
     }
   };
   
@@ -28,12 +30,13 @@ export default function Autocomplete({ searchText, setName }) {
   });
 
     return (
-      <div className="App" value={address} onChange={handleChange}>
+      <div className="autocomplete" value={address} onChange={handleChange}>
       {address !== "" ? (
-        <div>
+        <div className="innerAutocomplete">
           <button onClick={() => setName(address)}>
             <h2>
-            {address}
+              <LocationOnIcon/>
+              {address}
           </h2>
           </button>
         </div>
