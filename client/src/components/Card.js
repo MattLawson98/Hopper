@@ -4,9 +4,9 @@ import Venue from "./Venue";
 import VenueBack from "./VenueBack";
 import "./Card.scss";
 
+// Card flipping animation
 export default function CardFlip({isFlipped, bar, Copy}) {
 
-   
   return (
       <div className="card">
         <ReactCardFlip

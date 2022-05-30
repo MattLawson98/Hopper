@@ -1,11 +1,10 @@
 import React from "react";
 import "./Stamp.scss";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-import ShareIcon from '@mui/icons-material/Share';
+import ShareIcon from "@mui/icons-material/Share";
 
+// Smaller version of venue info that is used in history container
 export default function Stamp({ history }) {
-  console.log("HISTORY!", { history });
-
 
   const barImage = (reference) => {
     return `https://maps.googleapis.com/maps/api/place/photo?photoreference=${reference}&sensor=false&maxheight=1000&maxwidth=1000&key=${process.env.REACT_APP_GOOGLE_PHOTO_KEY}`;
@@ -17,8 +16,10 @@ export default function Stamp({ history }) {
         const barPhoto = barImage(bar.photos[0].photo_reference);
 
         const CopyHistory = () => {
-          navigator.clipboard.writeText(`https://www.google.com/maps/search/?api=1&query=${bar.vicinity}&query_place_id=${bar.place_id}`);
-        }
+          navigator.clipboard.writeText(
+            `https://www.google.com/maps/search/?api=1&query=${bar.vicinity}&query_place_id=${bar.place_id}`
+          );
+        };
 
         return (
           <div key={bar.name} className="stamp">

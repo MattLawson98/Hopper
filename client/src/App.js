@@ -9,7 +9,6 @@ import useChangeState from "./components/hooks/useChangeState";
 import Landing from "./components/Landing";
 import NextButton from "./components/NextButton";
 
-
 export default function App() {
   const [found, setFound] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
@@ -20,23 +19,20 @@ export default function App() {
   let newResults = [];
   const { flip, isFlipped } = useChangeState();
 
-    function click() {
+  // Handles all actions resulting from clicking "Next Bar" button. Card is flipped to face down, a new pub is selected from newResults array, card with new pub flips to face up
+  function click() {
     flip();
     const currentHistory = [...history, bar];
     setHistory(currentHistory);
-    console.log(searchResults);
     newResults = searchResults;
-    console.log(newResults);
     venue = newResults[RandNum(newResults)];
-    newResults.splice(venueNum,1);
+    newResults.splice(venueNum, 1);
     setSearchResults(newResults);
-    setTimeout(flip,2000);
-    setTimeout(() => setBar(venue),1000);
+    setTimeout(flip, 2000);
+    setTimeout(() => setBar(venue), 1000);
   }
 
   const userLogin = function (loginInfo, cb) {
-    console.log("CB!", cb);
-
     const data = {
       email: loginInfo.email,
       password: loginInfo.password,
@@ -48,6 +44,7 @@ export default function App() {
   let lat;
   let lng;
 
+  // Axios request to retrieve geolocation data for location and return its lat and long
   const locationSearch = async (name) => {
     const options = {
       method: "GET",
@@ -75,17 +72,17 @@ export default function App() {
   let venue;
   let result = [];
 
+  // Used for the initial search when finding an array of bars based on the given location, and displays the first bar after clicking "Select" on location form
   const Search = () => {
-
     const options = {
       method: "GET",
       url: "https://google-maps28.p.rapidapi.com/maps/api/place/nearbysearch/json",
       params: {
         location: `${lat},${lng}`,
-        radius: '1000',
-        language: 'en',
-        keyword: 'pub',
-        maxprice: '3'
+        radius: "1000",
+        language: "en",
+        keyword: "pub",
+        maxprice: "3",
       },
       headers: {
         "X-RapidAPI-Host": "google-maps28.p.rapidapi.com",
@@ -100,7 +97,7 @@ export default function App() {
         venue = results[RandNum(results)];
         setBar(venue);
         newResults = results;
-        newResults.splice(venueNum,1);
+        newResults.splice(venueNum, 1);
         setSearchResults(newResults);
         flip();
       })
@@ -108,9 +105,10 @@ export default function App() {
         console.error(error);
       });
 
-    return (result, newResults);
+    return result, newResults;
   };
 
+  // Used to select random bar from array of bars
   const RandNum = (results) => {
     let max = results.length - 1;
     setVenueNum(Math.floor(Math.random() * max));
@@ -118,32 +116,27 @@ export default function App() {
     return venueNum;
   };
 
- 
-
-  
-
   return (
     <div className="App">
       <Header userLogin={userLogin} />
-      
+
       <Landing />
 
-        <main>
-          {found ? (
-            <>
+      <main>
+        {found ? (
+          <>
             <CardFlip bar={bar} isFlipped={isFlipped} click={click} />
             <NextButton click={click} />
-            </>
-          ) : (
-            <Location
-              setFound={setFound}
-              setSearchResults={setSearchResults}
-              locationSearch={locationSearch}
-            />
-          )}
-          <TripContainer history={history} />
-        </main>
+          </>
+        ) : (
+          <Location
+            setFound={setFound}
+            setSearchResults={setSearchResults}
+            locationSearch={locationSearch}
+          />
+        )}
+        <TripContainer history={history} />
+      </main>
     </div>
   );
-
 }

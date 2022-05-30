@@ -3,12 +3,12 @@ import "./Location.scss";
 import { useState } from "react";
 import Autocomplete from "./Autocomplete";
 
+// Location form that shows on main page
 export default function Location(props) {
   const [name, setName] = useState("");
   const [autoComplete, setAutocomplete] = useState(true);
 
   const handleAutocomplete = (text) => {
-    console.log("abc", text);
     setName(text);
     setAutocomplete(false);
   };

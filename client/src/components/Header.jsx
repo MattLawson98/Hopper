@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Dropdown from './Dropdown';
 
+// MUI header
 export default function Header({userLogin}) {
   return (
     <Box sx={{ flexGrow: 1 }}>

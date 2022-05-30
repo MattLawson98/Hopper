@@ -4,13 +4,11 @@ const router = express.Router();
 module.exports = (db) => {
 
   router.get("/", (req, res) => {
-    console.log("REQ BODY", req.body)
     const sql = `SELECT * FROM users;
     `
     db.query(sql)
     .then((results) => {
       res.send(results.rows)
-      console.log("INSERT RESULT ROWS", results.rows)
     })
     .catch((e) => {
       console.error(e);
