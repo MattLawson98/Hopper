@@ -45,4 +45,4 @@ Copy paste the following into your .env file:
 
 App was started using a boilerplate created by:
 
-- Garrett B [github] (https://github.com/garrettgsb)
+- Garrett B [github](https://github.com/garrettgsb)
